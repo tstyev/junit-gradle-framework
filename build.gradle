@@ -31,6 +31,30 @@ dependencies {
     implementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
 }
 
+tasks.register("apiTests", Test) {
+    useJUnitPlatform {
+        includeTags "API"
+    }
+}
+
+tasks.register("uiTests", Test) {
+    useJUnitPlatform {
+        includeTags "UI"
+    }
+}
+
+tasks.register("smokeTests", Test) {
+    useJUnitPlatform {
+        includeTags "Smoke"
+    }
+}
+
+tasks.register("regressionTests", Test) {
+    useJUnitPlatform {
+        includeTags "Regression"
+    }
+}
+
 test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
