@@ -94,8 +94,6 @@ RUN CHROME_MAJOR_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d'.
 #    chmod +x /usr/local/bin/chromedriver && \
 #    rm /tmp/chromedriver.zip
 
-RUN ls -l /usr/local/bin/chromedriver
-
 WORKDIR /app
 COPY . .
 
