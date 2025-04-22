@@ -35,28 +35,29 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
-tasks.register("apiTests", Test) {
-    useJUnitPlatform {
-        includeTags "API"
+def testTags = [
+        apiTests: "API",
+        uiTests: "UI",
+        smokeTests: "Smoke",
+        regressionTests: "Regression"
+]
+
+def configureTestTask = { taskName, tag ->
+    tasks.register(taskName, Test) {
+        useJUnitPlatform {
+            includeTags tag
+        }
+        systemProperties(System.getProperties())
+        testLogging {
+            events "passed", "skipped", "failed"
+            exceptionFormat "full"
+            showStandardStreams = true
+        }
     }
 }
 
-tasks.register("uiTests", Test) {
-    useJUnitPlatform {
-        includeTags "UI"
-    }
-}
-
-tasks.register("smokeTests", Test) {
-    useJUnitPlatform {
-        includeTags "Smoke"
-    }
-}
-
-tasks.register("regressionTests", Test) {
-    useJUnitPlatform {
-        includeTags "Regression"
-    }
+testTags.each { taskName, tag ->
+    configureTestTask(taskName, tag)
 }
 
 test {
@@ -64,5 +65,7 @@ test {
     systemProperties(System.getProperties())
     testLogging {
         events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
     }
 }
