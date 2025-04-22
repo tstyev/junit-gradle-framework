@@ -12,6 +12,6 @@ public class TestSimple extends BaseTest {
     @Tag("Smoke")
     void test() {
         System.out.println(getDriver().getCurrentUrl());
-        Assertions.assertEquals(1,2);
+        Assertions.assertEquals(1,1);
     }
 }

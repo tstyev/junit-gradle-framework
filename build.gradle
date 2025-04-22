@@ -23,7 +23,7 @@ dependencies {
     testImplementation "io.qameta.allure:allure-junit5:${allureVersion}"
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.28.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.29.0'
     implementation "io.github.cdimascio:java-dotenv:5.2.2"
     implementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
     implementation "org.slf4j:slf4j-api:2.0.17"
