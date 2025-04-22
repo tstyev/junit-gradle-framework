@@ -26,6 +26,8 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.28.1'
     implementation "io.github.cdimascio:java-dotenv:5.2.2"
     implementation "io.qameta.allure:allure-rest-assured:${allureVersion}"
+    implementation "org.slf4j:slf4j-api:2.0.17"
+    implementation 'ch.qos.logback:logback-classic:1.5.18'
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -60,4 +62,7 @@ tasks.register("regressionTests", Test) {
 test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
