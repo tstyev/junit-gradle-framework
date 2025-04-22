@@ -7,3 +7,4 @@ services:
       environment:
         TARGET_URL: "https://test.npgw.xyz/"
         CHROME_OPTIONS: "--headless --disable-dev-shm-usage --no-sandbox --disable-gpu --window-size=1920,1080"
+        TEST_TAGS: "test smokeTests"

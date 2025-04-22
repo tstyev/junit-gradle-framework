@@ -1,4 +1,4 @@
-FROM maven:3.9.9-eclipse-temurin-17
+FROM gradle:8.10-jdk17
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -26,4 +26,4 @@ RUN CHROME_MAJOR_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d'.
 WORKDIR /app
 COPY . .
 
-CMD ["sh", "-c", "mvn clean test -DTARGET_URL=$TARGET_URL -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
+CMD ["sh", "-c", "gradle clean $TEST_TAGS -DTARGET_URL=$TARGET_URL -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
