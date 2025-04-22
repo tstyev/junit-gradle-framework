@@ -33,8 +33,6 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUp() {
         ChromeOptions options = ProjectUtils.getChromeOptions(chromeOptions);
-
-//        options.setBinary("/usr/bin/google-chrome");
         driver = new ChromeDriver(options);
         driver.get(targetUrl);
 
