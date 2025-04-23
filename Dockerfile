@@ -3,7 +3,7 @@ FROM gradle:8.10-jdk17 AS builder
 WORKDIR /app
 COPY . .
 
-RUN gradle dependencies --no-daemon
+#RUN gradle dependencies --no-daemon
 
 FROM selenium/standalone-chrome:135.0-chromedriver-135.0
 
