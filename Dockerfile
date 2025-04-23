@@ -23,6 +23,9 @@ COPY --from=builder /app /app
 
 RUN mkdir -p /app/build && chmod -R 777 /app/build
 
+# Очистить каталог build перед выполнением задач
+RUN rm -rf /app/build/*
+
 ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage"
 ENV TEST_TAGS="test"
