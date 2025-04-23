@@ -9,9 +9,6 @@ FROM selenium/standalone-chrome:135.0-chromedriver-135.0
 
 USER root
 
-RUN apt-get clean && \
-    apt-get update || echo "Unable to fetch updates"
-
 # Обновляем и устанавливаем нужные пакеты
 RUN apt-get update && \
     apt-get install -y wget unzip curl ca-certificates && \
