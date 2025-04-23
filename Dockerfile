@@ -9,13 +9,13 @@ FROM selenium/standalone-chrome:135.0-chromedriver-135.0
 
 USER root
 
-#RUN apt-get update && \
-#    apt-get install -y wget unzip curl ca-certificates && \
-#    apt-get clean
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirror.karneval.cz/pub/linux/ubuntu|g' /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y wget unzip curl ca-certificates \
-    && apt-get clean
+RUN apt-get clean && \
+    apt-get update || echo "Unable to fetch updates"
+
+# Обновляем и устанавливаем нужные пакеты
+RUN apt-get update && \
+    apt-get install -y wget unzip curl ca-certificates && \
+    apt-get clean
 
 RUN wget https://services.gradle.org/distributions/gradle-8.10-bin.zip -P /tmp && \
     unzip /tmp/gradle-8.10-bin.zip -d /opt && \
