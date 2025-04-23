@@ -21,6 +21,8 @@ RUN wget https://services.gradle.org/distributions/gradle-8.10-bin.zip -P /tmp &
 WORKDIR /app
 COPY --from=builder /app /app
 
+RUN chmod -R 777 /app/build
+
 ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage"
 ENV TEST_TAGS="test"
