@@ -5,7 +5,7 @@ COPY . .
 
 #RUN gradle dependencies --no-daemon
 
-FROM selenium/standalone-chrome:135.0-chromedriver-135.0
+FROM selenium/standalone-chrome:133.0-chromedriver-133.0
 
 USER root
 
