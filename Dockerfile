@@ -9,7 +9,11 @@ FROM selenium/standalone-chrome:135.0-chromedriver-135.0
 
 USER root
 
-RUN apt-get update && \
+#RUN apt-get update && \
+#    apt-get install -y wget unzip curl ca-certificates && \
+#    apt-get clean
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.ubuntu.com/mirrors.txt|g' /etc/apt/sources.list \
+    && apt-get update && \
     apt-get install -y wget unzip curl ca-certificates && \
     apt-get clean
 
