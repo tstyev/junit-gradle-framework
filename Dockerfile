@@ -30,6 +30,6 @@ ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage"
 ENV TEST_TAGS="test"
 
-CMD ["sh", "-c", "gradle clean $TEST_TAGS -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
+CMD ["sh", "-c", "gradle clean --no-daemon $TEST_TAGS -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
 
 
