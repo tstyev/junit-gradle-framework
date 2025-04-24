@@ -1,35 +1,26 @@
-FROM gradle:8.10-jdk17 AS builder
+FROM gradle:8.10-jdk17-alpine
+
+RUN apk add --no-cache chromium chromium-chromedriver bash curl tar
+
+ENV ALLURE_VERSION=2.32.0
+
+RUN curl -Lo allure.tgz https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${ALLURE_VERSION}/allure-commandline-${ALLURE_VERSION}.tgz && \
+    tar -zxvf allure.tgz -C /opt/ && \
+    ln -s /opt/allure-${ALLURE_VERSION}/bin/allure /usr/bin/allure && \
+    rm allure.tgz
 
 WORKDIR /app
 COPY . .
-
-#RUN gradle dependencies --no-daemon
-
-FROM selenium/standalone-chrome:130.0-chromedriver-130.0
-
-USER root
-
-# Обновляем и устанавливаем нужные пакеты
-RUN apt-get update && \
-    apt-get install -y wget unzip curl ca-certificates && \
-    apt-get clean
-
-RUN wget https://services.gradle.org/distributions/gradle-8.10-bin.zip -P /tmp && \
-    unzip /tmp/gradle-8.10-bin.zip -d /opt && \
-    ln -s /opt/gradle-8.10/bin/gradle /usr/local/bin/gradle
-
-WORKDIR /app
-COPY --from=builder /app /app
-
-#RUN mkdir -p /app/build && chmod -R 777 /app/build
-#
-## Очистить каталог build перед выполнением задач
-#RUN rm -rf /app/build/*
 
 ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-allow-origins=*"
 ENV TEST_TAGS="test"
 
-CMD ["sh", "-c", "gradle  $TEST_TAGS --no-daemon -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
+ENV TARGET_URL="https://test.npgw.xyz/"
+ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-allow-origins=*"
+ENV TEST_TAGS="test"
+
+CMD ["sh", "-c", "gradle clean test --no-daemon -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\" \
+ && allure generate build/allure-results -o build/allure-report"]
 
 
