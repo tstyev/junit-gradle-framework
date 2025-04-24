@@ -10,6 +10,6 @@ ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --disable-gp
 ENV TEST_TAGS="test"
 
 RUN chmod +x ./gradlew
-CMD ["sh", "-c", "gradle test -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
+CMD ["sh", "-c", "gradle -DTEST_TAGS=\"$TEST_TAGS\" -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
 
 
