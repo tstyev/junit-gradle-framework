@@ -7,8 +7,7 @@ COPY . .
 
 ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-allow-origins=*"
-ENV TEST_TAGS="test"
 
-CMD ["sh", "-c", "gradle test -DTEST_TAGS=\"$TEST_TAGS\" -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
+CMD ["gradle test -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
 
 
