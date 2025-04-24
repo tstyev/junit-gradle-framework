@@ -9,7 +9,7 @@ ENV TARGET_URL="https://test.npgw.xyz/"
 ENV CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --disable-gpu --remote-allow-origins=*"
 ENV TEST_TAGS="test"
 
-RUN chmod -R 777 /app/build/allure-results
+RUN mkdir -p /app/build/allure-results && chown -R jenkins:jenkins /app/build/allure-results
 
 CMD ["sh", "-c", "gradle -DTEST_TAGS=\"$TEST_TAGS\" -DTARGET_URL=\"$TARGET_URL\" -DCHROME_OPTIONS=\"$CHROME_OPTIONS\""]
 
