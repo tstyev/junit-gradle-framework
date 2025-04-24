@@ -35,6 +35,8 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 }
 
+def selectedTags = System.getProperty('TEST_TAGS')?.split(" ") ?: []
+
 def testTags = [
         apiTests: "API",
         uiTests: "UI",
@@ -61,7 +63,9 @@ testTags.each { taskName, tag ->
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform() {
+        includeTags(*selectedTags) // передаем selectedTags как аргумент
+    }
     systemProperties(System.getProperties())
     testLogging {
         events "passed", "skipped", "failed"
