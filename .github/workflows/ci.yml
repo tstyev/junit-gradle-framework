@@ -19,7 +19,7 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: '17'
-          cache: 'maven'
+          cache: 'gradle'
 
       - name: Create screenshots directory
         run: mkdir -p ${{ github.workspace }}/screenshots
