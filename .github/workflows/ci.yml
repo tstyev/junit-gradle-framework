@@ -30,6 +30,7 @@ jobs:
       - name: Gradle test
         run: ./gradlew test
         env:
+          TARGET_URL: https://www.saucedemo.com/
           CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
           CI_RUN: true
 
