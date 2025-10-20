@@ -21,25 +21,24 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Create screenshots directory
-        run: mkdir -p ${{ github.workspace }}/screenshots
+#      - name: Create screenshots directory
+#        run: mkdir -p ${{ github.workspace }}/screenshots
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x ./gradlew
 
       - name: Gradle test
-        run: ./gradlew test
+        run: ./gradlew clean test
         env:
           TARGET_URL: https://www.saucedemo.com/
           CHROME_OPTIONS: --remote-allow-origins=* --disable-gpu --no-sandbox --disable-dev-shm-usage --headless=new --window-size=1920,1080
-          CI_RUN: true
 
-      - name: Attach screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/screenshots
+#      - name: Attach screenshots
+#        if: failure()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: screenshots
+#          path: ${{ github.workspace }}/screenshots
 
       - name: Load test report history
         uses: actions/checkout@v3
